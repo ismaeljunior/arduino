@@ -1,0 +1,87 @@
+#include <LiquidCrystal.h>
+int minu=23,seg=50,hora=20;
+LiquidCrystal lcd(12,11,5,4,3,2); //config dos pinos do lcd,12-rs , 11-e
+void setup() {
+  lcd.begin(20,4);
+  pinMode(8,OUTPUT);
+  pinMode(9,OUTPUT);
+  pinMode(10,OUTPUT);
+  
+  digitalWrite(13,0);
+  delay(30);
+  
+}
+
+void loop() {
+  seg++;
+  if(seg==60){
+    seg =00;
+    minu++;
+    if(minu==60){
+      minu=00;
+      hora++;
+    
+    if(hora==24){
+      hora = 00;
+      }
+    }
+  }
+  lcd.clear();
+  lcd.home();
+  if(hora<10){
+    lcd.print("0");
+  }
+  lcd.print(hora);
+  lcd.print(":");
+  if(minu<10){
+    lcd.print("0");
+  }
+  lcd.print(minu);
+  lcd.print(":");
+  if(seg<10){
+    lcd.print("0");
+  }
+  lcd.print(seg);
+  lcd.setCursor(0,4);
+  lcd.print("1.OF    2.OF    3.OF");
+  if((hora==20)&&(minu==24)&&((seg>=0)&&(seg<10))){
+    
+        digitalWrite(8,1);
+        digitalWrite(9,0);
+        digitalWrite(10,0);
+        lcd.setCursor(0,4);
+        lcd.print("1.ON    2.OF    3.OF");
+      
+    
+}
+  if((hora==20)&&(minu==24)&&((seg>=10)&&(seg<20))){
+  
+     
+        digitalWrite(9,1);
+        lcd.setCursor(0,4);
+        lcd.print("1.ON    2.ON    3.OF");
+     
+  
+}
+  if((hora==20)&&(minu==24)&&((seg>=20)&&(seg<30))){
+    digitalWrite(10,1);
+    lcd.setCursor(0,4);
+    lcd.print("1.ON    2.ON    3.ON");
+  }
+  if((hora==20)&&(minu==24)&&((seg>=30)&&(seg<50))){
+    digitalWrite(10,0);
+    lcd.setCursor(0,4);
+    lcd.print("1.ON    2.ON    3.OF");
+  }
+  if((hora==20)&&((minu>=24)&&(seg>=50))||((minu==25)&&(seg<30))){
+    digitalWrite(9,0);
+    lcd.setCursor(0,4);
+    lcd.print("1.ON    2.OF    3.OF");
+  }
+  if((hora==20)&&(minu==25)&&(seg==30)){
+    digitalWrite(8,0);
+    lcd.setCursor(0,4);
+    lcd.print("1.OF    2.OF    3.OF");
+  }
+  delay(1000);
+}
