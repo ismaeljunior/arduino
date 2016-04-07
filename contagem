@@ -1,0 +1,68 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12,11,5,4,3,2); //config dos pinos do lcd,12-rs , 11-e
+void setup() {
+   lcd.begin(20,4);
+   pinMode(7,OUTPUT); // led
+   pinMode(8,INPUT);  // botao 1
+   digitalWrite(8,1);
+   pinMode(9,INPUT);   // botao 2
+   digitalWrite(9,1);
+   pinMode(10,INPUT);  // botao 3
+   digitalWrite(10,1); 
+   delay(30);
+}
+
+void loop() {
+  lcd.clear();
+  if((digitalRead(8)==0)&&(digitalRead(10)==0)){
+    lcd.home();
+    lcd.print("contagem");
+    lcd.setCursor(0,1);
+    lcd.print("9 s");
+    delay(1000);  
+    while(true){
+      lcd.setCursor(0,1); 
+      lcd.print("8 s");
+      if((digitalRead(9)==0)&&(digitalRead(10)==0)) break;
+      delay(1000);
+      lcd.setCursor(0,1);
+      lcd.print("7 s");
+      if((digitalRead(9)==0)&&(digitalRead(10)==0)) break;
+      delay(1000);
+      lcd.setCursor(0,1);
+      lcd.print("6 s");
+      if((digitalRead(9)==0)&&(digitalRead(10)==0)) break;
+      delay(1000);
+      lcd.setCursor(0,1);
+      lcd.print("5 s");
+      if((digitalRead(9)==0)&&(digitalRead(10)==0)) break;
+      delay(1000);
+      lcd.setCursor(0,1);
+      lcd.print("4 s");
+      if((digitalRead(9)==0)&&(digitalRead(10)==0)) break;
+      delay(1000);
+      lcd.setCursor(0,1);
+      lcd.print("3 s");
+      if((digitalRead(9)==0)&&(digitalRead(10)==0)) break;
+      delay(1000);
+      lcd.setCursor(0,1);
+      lcd.print("2 s");
+      if((digitalRead(9)==0)&&(digitalRead(10)==0)) break;
+      delay(1000);
+      lcd.setCursor(0,1);
+      lcd.print("1 s");
+      if((digitalRead(9)==0)&&(digitalRead(10)==0)) break;
+      delay(1000);
+      lcd.setCursor(0,1);
+      lcd.print("0 s");
+      if((digitalRead(9)==0)&&(digitalRead(10)==0)) break;
+      delay(500);
+      lcd.clear();
+     
+      break;
+    }
+  if((digitalRead(9)==1)&&(digitalRead(10)==1))
+   digitalWrite(7,1);
+  }
+
+}
