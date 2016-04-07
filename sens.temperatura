@@ -1,0 +1,63 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12,11,5,4,3,2); //config dos pinos do lcd,12-rs , 11-e
+void setup() {
+  Serial.begin(9600);
+  analogReference(INTERNAL1V1); // para colocar a tensão para 1,1 v
+  lcd.begin(20,4);
+  pinMode(8,OUTPUT);   //led 1 azul
+  pinMode(9,OUTPUT);    //led 2  verde
+  pinMode(10,OUTPUT);    //led3    verm
+  pinMode(7,INPUT);    // botao
+  digitalWrite(7,1);    
+  
+}
+ int lsensor(int entanalog){
+  return analogRead(entanalog);
+ }
+void loop() {
+  float temp,tensao;
+  lcd.clear();
+  if(digitalRead(7)==0){
+    while(1){ 
+      tensao = (lsensor(A0)*1.1)/1023;
+      temp = (tensao*1.0)/0.01;
+      Serial.println(temp);
+      
+      delay(500);
+      if (temp<=28.0){
+       digitalWrite(8,1);
+       digitalWrite(9,0);
+       digitalWrite(10,0);
+       lcd.clear();
+       lcd.home();
+       lcd.print("temp ");
+       lcd.print(temp);
+       lcd.setCursor(0,4);
+       lcd.print("1.ON   2.OFF   3.OFF");
+      } 
+      else if((temp>28.0)&&(temp<31.0)){
+        digitalWrite(8,0);
+        digitalWrite(10,0);
+        digitalWrite(9,1);
+        lcd.clear();
+        lcd.home();
+        lcd.print("temp ");
+        lcd.print(temp);
+        lcd.setCursor(0,4);
+        lcd.print("1.OFF   2.ON   3.OFF");
+       }
+      else if(temp>=31.0){
+        digitalWrite(8,0);
+        digitalWrite(9,0);
+        digitalWrite(10,1);
+        lcd.clear();
+        lcd.home();
+        lcd.print("temp ");
+        lcd.print(temp);
+        lcd.setCursor(0,4);
+        lcd.print("1.OFF   2.OFF   3.ON");
+      }
+    }
+   }
+  }
+
