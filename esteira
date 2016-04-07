@@ -1,0 +1,46 @@
+int f,i,j=1;
+void setup() {
+  for(f=18;f<=21;f++){
+    pinMode(f,OUTPUT);
+    digitalWrite(f,0);
+  }
+  pinMode(7,OUTPUT);
+  pinMode(2,INPUT);
+  digitalWrite(2,1);
+  attachInterrupt(0,leituraAutomatica,RISING);
+
+}
+void loop() {
+ 
+    
+    digitalWrite(18,1);  digitalWrite(19,0); 
+    digitalWrite(21,0);  digitalWrite(20,0); 
+    delay(100);
+    
+    digitalWrite(18,0);  digitalWrite(19,1); 
+    digitalWrite(21,0);  digitalWrite(20,0); 
+    delay(100);
+    
+    digitalWrite(18,0);  digitalWrite(19,0); 
+    digitalWrite(21,0);  digitalWrite(20,1); 
+    delay(100);
+    
+    digitalWrite(18,0);  digitalWrite(19,0); 
+    digitalWrite(21,1);  digitalWrite(20,0); 
+    delay(100); 
+    
+      
+}
+
+void leituraAutomatica(){
+  
+  //noInterrupts();
+  cli();
+  digitalWrite(7,1);
+  delay(3000);
+  digitalWrite(7,0);
+  //interrupts();
+  sei();
+  
+ 
+}
