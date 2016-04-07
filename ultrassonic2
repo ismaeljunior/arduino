@@ -1,0 +1,25 @@
+#include <Ultrasonic.h>
+
+Ultrasonic ultra(12,13);
+void setup() {
+  pinMode(3,OUTPUT);
+  pinMode(2,OUTPUT);
+  pinMode(4,OUTPUT);
+  pinMode(5,OUTPUT);
+}
+
+void loop() {
+   
+   digitalWrite(3,1);
+   digitalWrite(2,0);
+   digitalWrite(4,0);    // reto
+   digitalWrite(5,1);
+   
+   if(ultra.Ranging(CM)<20){
+     digitalWrite(3,0);
+     digitalWrite(2,0);
+     digitalWrite(4,1);    // reto
+     digitalWrite(5,0);
+     delay(2000);
+   }
+}
