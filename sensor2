@@ -1,0 +1,33 @@
+int leituraSensor= 0,f;
+void setup() {
+  for(f=8;f<=11;f++){
+    pinMode(f,OUTPUT);
+    digitalWrite(f,0);
+  }
+  pinMode(2,INPUT);
+  digitalWrite(2,1);
+  attachInterrupt(0,leituraAutomatica,RISING);
+
+}
+void loop() {
+  digitalWrite(8,1);  digitalWrite(9,0); 
+  digitalWrite(11,0);  digitalWrite(10,0); 
+  delay(leituraSensor);
+    
+  digitalWrite(8,0);  digitalWrite(9,1); 
+  digitalWrite(11,0);  digitalWrite(10,0); 
+  delay(leituraSensor);
+    
+  digitalWrite(8,0);  digitalWrite(9,0); 
+  digitalWrite(11,0);  digitalWrite(10,1); 
+  delay(leituraSensor);
+    
+  digitalWrite(8,0);  digitalWrite(9,0); 
+  digitalWrite(11,1);  digitalWrite(10,0); 
+  delay(leituraSensor);      //aplica delay tomando como parametro o valor da tensao no potenciometro
+  
+}
+
+void leituraAutomatica(){
+  leituraSensor = analogRead(A0);
+}
