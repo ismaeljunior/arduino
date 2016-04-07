@@ -1,0 +1,49 @@
+#include <Servo.h>
+
+#include <Ultrasonic.h>
+Servo servo;
+Ultrasonic ultra(12,13);
+
+void setup() {
+  pinMode(3,OUTPUT);
+  pinMode(2,OUTPUT);
+  pinMode(4,OUTPUT);
+  pinMode(5,OUTPUT);
+  servo.attach(9);
+}
+
+void loop() {
+   int dist = ultra.Ranging(CM);
+   int d1,d2;
+   servo.write(90);
+   digitalWrite(3,1);
+   digitalWrite(2,0);
+   digitalWrite(4,0);    // reto
+   digitalWrite(5,1);
+   
+   
+   if(dist<20){
+     servo.write(45);
+     delay(1000);
+     d1 = dist;
+     delay(1350);
+     servo.write(135);
+     delay(1000);
+     d2 = dist;
+     delay(1350);
+     
+     if(d1>d2){
+       digitalWrite(2,0);
+       digitalWrite(3,0);
+       digitalWrite(4,0);    //curva direita
+       digitalWrite(5,1);
+       delay(1500);
+     }else{
+       digitalWrite(2,1);
+       digitalWrite(3,0);
+       digitalWrite(4,0);    //curva eaquerda
+       digitalWrite(5,0);
+       delay(1500);
+     }
+   }
+}
