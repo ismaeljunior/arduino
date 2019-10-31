@@ -1,2 +1,3 @@
-# arduino
-projects
+# Arduino
+
+Repository with some arduino projects.
