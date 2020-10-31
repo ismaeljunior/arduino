@@ -34,12 +34,10 @@ void loop() {
 
 void leituraAutomatica(){
   
-  //noInterrupts();
   cli();
   digitalWrite(7,1);
   delay(3000);
   digitalWrite(7,0);
-  //interrupts();
   sei();
   
  
