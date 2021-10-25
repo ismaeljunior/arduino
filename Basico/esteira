@@ -10,6 +10,7 @@ void setup() {
   attachInterrupt(0,leituraAutomatica,RISING);
 
 }
+//trecho recorrente
 void loop() {
  
     
