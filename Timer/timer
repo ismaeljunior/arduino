@@ -2,17 +2,11 @@
 int est=0;
 
 void setup() {
-
- Timer1.initialize(1000000);
- Timer1.attachInterrupt(intTimer);
-pinMode(10,OUTPUT);
-
+  Timer1.initialize(1000000);
+  Timer1.attachInterrupt(intTimer);
+  pinMode(10,OUTPUT);
 }
 
-void loop() {
-
-
-}
 void intTimer(){
   digitalWrite(10,est);
   if(est==0)est=1;
